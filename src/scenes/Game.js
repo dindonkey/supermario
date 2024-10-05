@@ -19,7 +19,7 @@ export class Game extends Scene {
     platformTilesLayer.setCollisionByExclusion([-1]);
 
     // create player and set collision on word bounds
-    this.player = this.physics.add.sprite(15, 0, "mario");
+    this.player = this.physics.add.sprite(32, 0, "mario");
     this.playerDirection = "right";
     this.player.setCollideWorldBounds(true);
 
@@ -49,6 +49,18 @@ export class Game extends Scene {
       frameRate: 20,
     });
 
+    this.anims.create({
+      key: "jump-right",
+      frames: [{ key: "mario", frame: 9 }],
+      frameRate: 20,
+    });
+
+    this.anims.create({
+      key: "jump-left",
+      frames: [{ key: "mario", frame: 0 }],
+      frameRate: 20,
+    });
+
     // add player and platform layer collision
     this.physics.add.collider(this.player, platformTilesLayer);
 
@@ -65,18 +77,25 @@ export class Game extends Scene {
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-160);
       this.playerDirection = "left";
-      this.player.anims.play("left", true);
+      if (this.player.body.blocked.down) {
+        this.player.anims.play("left", true);
+      }
     } else if (this.cursors.right.isDown) {
       this.player.setVelocityX(160);
       this.playerDirection = "right";
-      this.player.anims.play("right", true);
+      if (this.player.body.blocked.down) {
+        this.player.anims.play("right", true);
+      }
     } else {
       this.player.setVelocityX(0);
-      this.player.anims.play(`turn-${this.playerDirection}`);
+      if (this.player.body.blocked.down) {
+        this.player.anims.play(`turn-${this.playerDirection}`);
+      }
     }
 
-    if (this.cursors.up.isDown) {
-      this.player.setVelocityY(-130);
+    if (this.cursors.up.isDown && this.player.body.blocked.down) {
+      this.player.setVelocityY(-230);
+      this.player.anims.play(`jump-${this.playerDirection}`);
     }
   }
 }
