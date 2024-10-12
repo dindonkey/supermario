@@ -1,6 +1,9 @@
 import { Scene } from "phaser";
 import Player from "../models/player";
 
+const PLAYER_SPAWN_X = 32;
+const PLAYER_SPAWN_Y = 0;
+
 export class Game extends Scene {
   constructor() {
     super("Game");
@@ -10,7 +13,7 @@ export class Game extends Scene {
     const { worldWidth, worldHeight, platformTilesLayer } =
       this._createTileMap();
 
-    this.player = new Player({ scene: this, x: 32, y: 0 });
+    this.player = new Player({ scene: this, x: PLAYER_SPAWN_X, y: PLAYER_SPAWN_Y });
     
     this.physics.add.collider(this.player, platformTilesLayer);
     this.physics.add.collider(
