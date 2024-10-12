@@ -51,9 +51,18 @@ export class Game extends Scene {
     const tileset = map.addTilesetImage("super-mario", "super_mario_tiles");
     // create background layer
     map.createLayer("Background", tileset);
-    // create platform layer and set collision on its tiles
-    const platformTilesLayer = map.createLayer("Platforms", tileset);
+    // create ground layer and set collision on its tiles
+    const platformTilesLayer = map.createLayer('Ground', tileset);
     platformTilesLayer.setCollisionByExclusion([-1]);
+    // create bricks
+    this.bricks = this.physics.add.staticGroup();
+    this.bricksLayer = map.getObjectLayer('Bricks');
+    this.bricksLayer.objects.forEach(element => {
+      // console.log(element.x, element.y, element.width, element.height)
+      this.bricks.create(element.x, element.y, 'brick');
+
+    });
+
 
     return { worldWidth, worldHeight, platformTilesLayer };
   }
