@@ -24,7 +24,7 @@ export class Game extends Scene {
     // create bricks
     this.bricks = new BricksGroup({
       scene: this,
-      objectLayer: this.levelMap.map.getObjectLayer("Bricks"),
+      objectLayer: this.levelMap.bricksLayer,
     });
 
     this.physics.add.collider(this.player, this.levelMap.groundLayer);
@@ -45,5 +45,5 @@ export class Game extends Scene {
   update() {
     this.player.update();
   }
-  
+
 }
