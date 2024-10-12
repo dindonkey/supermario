@@ -1,11 +1,11 @@
 import { Boot } from './scenes/Boot';
 import { Game } from './scenes/Game';
 import { GameOver } from './scenes/GameOver';
-import { MainMenu } from './scenes/MainMenu';
 import { Preloader } from './scenes/Preloader';
 
-export const DISPLAY_WIDTH =  11 * 16; // Number of tiles * size of the tile
-export const DISPLAY_HEIGHT =  11 * 16; // Number of tiles * size of the tile
+const DISPLAY_WIDTH =  11 * 16; // Number of tiles * size of the tile
+const DISPLAY_HEIGHT =  11 * 16; // Number of tiles * size of the tile
+const GRAVITY = 500
 
 const config = {
     type: Phaser.AUTO,
@@ -13,12 +13,10 @@ const config = {
     height: DISPLAY_HEIGHT,
     zoom: 4,
     parent: 'game-container',
-    backgroundColor: '#028af8',
 
     scene: [
         Boot,
         Preloader,
-        MainMenu,
         Game,
         GameOver
     ],
@@ -26,7 +24,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 500 },
+            gravity: { y: GRAVITY },
             debug: false
         }
     }
