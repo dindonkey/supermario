@@ -8,16 +8,6 @@ class Brick extends Physics.Arcade.Sprite {
     scene.add.existing(this);
     scene.physics.add.existing(this, true);
   }
-
-  _hitBrick(_, brick) {
-    this.tweens.add({
-      targets: brick,
-      y: "-=5",
-      ease: "Linear",
-      yoyo: true,
-      duration: 100,
-    });
-  }
 }
 
 export default Brick;
