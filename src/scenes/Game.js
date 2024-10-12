@@ -13,6 +13,14 @@ export class Game extends Scene {
     this._createAnimations();
 
     this.physics.add.collider(this.player, platformTilesLayer);
+    this.physics.add.collider(
+      this.player,
+      this.bricks,
+      this._hitBrick,
+      null,
+      this
+    );
+
     this.cursors = this.input.keyboard.createCursorKeys();
     this._configureCamera(worldWidth, worldHeight, this.player);
   }
@@ -52,17 +60,15 @@ export class Game extends Scene {
     // create background layer
     map.createLayer("Background", tileset);
     // create ground layer and set collision on its tiles
-    const platformTilesLayer = map.createLayer('Ground', tileset);
+    const platformTilesLayer = map.createLayer("Ground", tileset);
     platformTilesLayer.setCollisionByExclusion([-1]);
+
     // create bricks
     this.bricks = this.physics.add.staticGroup();
-    this.bricksLayer = map.getObjectLayer('Bricks');
-    this.bricksLayer.objects.forEach(element => {
-      // console.log(element.x, element.y, element.width, element.height)
-      this.bricks.create(element.x, element.y, 'brick');
-
+    this.bricksLayer = map.getObjectLayer("Bricks");
+    this.bricksLayer.objects.forEach((element) => {
+      this.bricks.create(element.x, element.y, "brick");
     });
-
 
     return { worldWidth, worldHeight, platformTilesLayer };
   }
@@ -112,5 +118,16 @@ export class Game extends Scene {
     this.physics.world.setBounds(0, 0, width, height);
     this.cameras.main.setBounds(0, 0, width, height);
     this.cameras.main.startFollow(player);
+  }
+
+  _hitBrick(player, brick) {
+    console.log(brick);
+    this.tweens.add({
+      targets: brick,
+      y: "-=5",
+      ease: "Linear",
+      yoyo: true,
+      duration: 100,
+    });
   }
 }
