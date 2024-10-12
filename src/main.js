@@ -1,7 +1,7 @@
 import { Boot } from './scenes/Boot';
 import { Game } from './scenes/Game';
 import { GameOver } from './scenes/GameOver';
-import { Preloader } from './scenes/Preloader';
+import Preloader from './scenes/Preloader';
 
 const DISPLAY_WIDTH =  11 * 16; // Number of tiles * size of the tile
 const DISPLAY_HEIGHT =  11 * 16; // Number of tiles * size of the tile

@@ -1,6 +1,6 @@
 import { Physics } from "phaser";
+import { MARIO_SPRITE_KEY } from "../scenes/Preloader";
 
-const SPRITE_KEY = 'mario';
 const LEFT = 'left';
 const RIGHT = 'right';
 const WALK_LEFT_ANIM_KEY = 'walk-left';
@@ -13,7 +13,7 @@ const VELOCITY_Y = 230;
 class Player extends Physics.Arcade.Sprite {
 
   constructor({ scene, x, y}) {
-    super(scene, x ,y, SPRITE_KEY);
+    super(scene, x ,y, MARIO_SPRITE_KEY);
     scene.add.existing(this);
     scene.physics.add.existing(this, false);
     this.playerDirection = RIGHT;
@@ -52,34 +52,34 @@ class Player extends Physics.Arcade.Sprite {
   _createAnimations() {
     this.anims.create({
       key: WALK_LEFT_ANIM_KEY,
-      frames: this.anims.generateFrameNumbers(SPRITE_KEY, { start: 3, end: 1 }),
+      frames: this.anims.generateFrameNumbers(MARIO_SPRITE_KEY, { start: 3, end: 1 }),
       frameRate: 10,
       repeat: -1,
     });
     this.anims.create({
       key: WALK_RIGHT_ANIM_KEY,
-      frames: this.anims.generateFrameNumbers(SPRITE_KEY, { start: 6, end: 8 }),
+      frames: this.anims.generateFrameNumbers(MARIO_SPRITE_KEY, { start: 6, end: 8 }),
       frameRate: 10,
       repeat: -1,
     });
     this.anims.create({
       key: `${TURN_ANIM_KEY}-${RIGHT}`,
-      frames: [{ key: SPRITE_KEY, frame: 5 }],
+      frames: [{ key: MARIO_SPRITE_KEY, frame: 5 }],
       frameRate: 20,
     });
     this.anims.create({
       key: `${TURN_ANIM_KEY}-${LEFT}`,
-      frames: [{ key: SPRITE_KEY, frame: 4 }],
+      frames: [{ key: MARIO_SPRITE_KEY, frame: 4 }],
       frameRate: 20,
     });
     this.anims.create({
       key: `${JUMP_ANIM_KEY}-${RIGHT}`,
-      frames: [{ key: SPRITE_KEY, frame: 9 }],
+      frames: [{ key: MARIO_SPRITE_KEY, frame: 9 }],
       frameRate: 20,
     });
     this.anims.create({
       key: `${JUMP_ANIM_KEY}-${LEFT}`,
-      frames: [{ key: SPRITE_KEY, frame: 0 }],
+      frames: [{ key: MARIO_SPRITE_KEY, frame: 0 }],
       frameRate: 20,
     });
   }

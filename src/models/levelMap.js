@@ -1,18 +1,21 @@
-const TILEMAP_KEY = "tilemap";
-const TILESET_NAME = "super-mario"; // match json tileset name
-const TILES_KEY = "super_mario_tiles";
+import {
+  LEVEL_TILEMAP_KEY,
+  SUPER_MARIO_TILESET_NAME,
+  SUPER_MARIO_TILES_KEY
+} from "../scenes/Preloader";
+
 const BACKGROUND_LAYER = "Background";
 const GROUND_LAYER = "Ground";
 const BRICKS_LAYER = "Bricks";
 
 class LevelMap {
   constructor(scene) {
-    const map = scene.make.tilemap({ key: TILEMAP_KEY });
+    const map = scene.make.tilemap({ key: LEVEL_TILEMAP_KEY });
     this.worldWidth = map.tileWidth * map.width;
     this.worldHeight = map.tileHeight * map.height;
 
     // load tileset
-    const tileset = map.addTilesetImage(TILESET_NAME, TILES_KEY);
+    const tileset = map.addTilesetImage(SUPER_MARIO_TILESET_NAME, SUPER_MARIO_TILES_KEY);
 
     // create background layer
     map.createLayer(BACKGROUND_LAYER, tileset);
