@@ -3,6 +3,7 @@ import Player from "../models/player";
 import BricksGroup from "../models/bricksGroup";
 import PlayerBricksCollider from "../models/playerBricksCollider";
 import LevelMap from "../models/levelMap";
+import CameraManager from "../models/cameraManager";
 
 const PLAYER_SPAWN_X = 32;
 const PLAYER_SPAWN_Y = 0;
@@ -13,7 +14,7 @@ export class Game extends Scene {
   }
 
   create() {
-    this.levelMap = new LevelMap(this)
+    this.levelMap = new LevelMap(this);
     this.player = new Player({
       scene: this,
       x: PLAYER_SPAWN_X,
@@ -33,16 +34,16 @@ export class Game extends Scene {
       bricks: this.bricks,
     });
 
-    this._configureCamera(this.levelMap.worldWidth, this.levelMap.worldHeight, this.player);
+    this.cameraManager = new CameraManager({
+      scene: this,
+      player: this.player,
+      width: this.levelMap.worldWidth,
+      height: this.levelMap.worldHeight,
+    });
   }
 
   update() {
     this.player.update();
   }
-
-  _configureCamera(width, height, player) {
-    this.physics.world.setBounds(0, 0, width, height);
-    this.cameras.main.setBounds(0, 0, width, height);
-    this.cameras.main.startFollow(player);
-  }
+  
 }
